@@ -12,3 +12,10 @@
   justify-content: $jc;
   align-items: $ai;
 }
+
+// apply styles on dark theme
+@mixin dark-theme {
+  body.dark-theme & {
+    @content;
+  }
+}
