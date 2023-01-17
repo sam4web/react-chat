@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import WebFont from 'webfontloader';
 import Navbar from './components/Navbar';
+import Hero from './components/Hero';
 
 export default function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(
@@ -12,7 +13,7 @@ export default function App() {
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ['Nunito', 'Inter', 'Open Sans'],
+        families: ['Nunito', 'Inter'],
       },
     });
   }, []);
@@ -37,6 +38,7 @@ export default function App() {
     <>
       <main className='container'>
         <Navbar toggleTheme={toggleTheme} />
+        <Hero />
       </main>
     </>
   );

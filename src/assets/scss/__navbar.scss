@@ -103,36 +103,20 @@
 }
 
 .sign-btn {
-  @include flex(space-between, center);
-  cursor: pointer;
-  gap: 5px;
+  background-color: $white;
+  border-radius: 5px;
   padding: 8.5px 10px;
   border: none;
-  border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;
-  background-color: $white;
-
-  @include responsive-small {
-    padding: 5px;
-  }
 
   &:hover {
-    transform: translatey(-4px);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
       rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   }
 
-  &__icon {
-    width: 23px;
-    height: 23px;
-  }
-
-  &__text {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
+  .btn__text {
+    color: $dark;
     letter-spacing: -0.5px;
-    font-weight: 500;
-    user-select: none;
 
     @include responsive-small {
       display: none;

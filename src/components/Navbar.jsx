@@ -21,9 +21,9 @@ export default function Navbar({ toggleTheme }) {
           </div>
           {/* /theme-toggler */}
 
-          <button className='sign-btn'>
-            <FcGoogle className='sign-btn__icon' />
-            <span className='sign-btn__text'>Sign in with Google</span>
+          <button className='sign-btn btn'>
+            <FcGoogle className='btn__icon' />
+            <span className='btn__text'>Sign in with Google</span>
           </button>
           {/* /sign-btn */}
         </div>
