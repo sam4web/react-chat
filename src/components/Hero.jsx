@@ -14,8 +14,9 @@ export default function Hero() {
           </a>{' '}
           and{' '}
           <a href='https://firebase.google.com/' target='_blank'>
-            Firebase.
-          </a>{' '}
+            Firebase
+          </a>
+          .{' '}
         </p>
         {/* content */}
 
