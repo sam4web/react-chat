@@ -9,6 +9,7 @@ export default function Navbar({ toggleTheme }) {
           <img src='/react.svg' className='nav-logo__icon' alt='logo' />
           <span className='nav-logo__text'>react-chat</span>
         </div>
+        {/* /nav-logo */}
 
         <div className='nav-options'>
           <div className='theme-toggler' onClick={toggleTheme}>

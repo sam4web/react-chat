@@ -1,16 +1,16 @@
-@mixin responsive_large() {
+@mixin responsive-large() {
   @media only screen and (max-width: 992px) {
     @content;
   }
 }
 
-@mixin responsive_medium() {
+@mixin responsive-medium() {
   @media only screen and (max-width: 768px) {
     @content;
   }
 }
 
-@mixin responsive_small() {
+@mixin responsive-small() {
   @media only screen and (max-width: 565px) {
     @content;
   }

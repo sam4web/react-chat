@@ -35,7 +35,7 @@ body {
   line-height: 24px;
   font-family: 'Nunito', sans-serif;
 
-  @include responsive_small {
+  @include responsive-small {
     font-size: 16px;
   }
 

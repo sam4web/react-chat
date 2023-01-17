@@ -7,6 +7,8 @@ export default function App() {
     JSON.parse(localStorage.getItem('isDarkTheme'))
   );
 
+  // Fonts
+  // => load fonts when page loads using 'webfontloader' package
   useEffect(() => {
     WebFont.load({
       google: {
@@ -15,6 +17,10 @@ export default function App() {
     });
   }, []);
 
+  // theme toggle
+  //  => runs when isDarkTheme state is changed
+  //  => sets localStorge item to isDarkTheme state
+  //  => add or remove 'dark-theme' class from <body> according to isDarkTheme state
   useEffect(() => {
     localStorage.setItem('isDarkTheme', isDarkTheme);
     isDarkTheme
@@ -22,6 +28,7 @@ export default function App() {
       : document.body.classList.remove('dark-theme');
   }, [isDarkTheme]);
 
+  // toggles isDarkTheme state
   const toggleTheme = () => {
     setIsDarkTheme((prevIsDarkTheme) => !prevIsDarkTheme);
   };
