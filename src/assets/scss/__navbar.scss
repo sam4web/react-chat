@@ -1,0 +1,193 @@
+.nav {
+  padding: 20px;
+  @include flex();
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+
+  @include responsive-small {
+    padding: 20px 10px;
+  }
+
+  &-options {
+    @include flex(space-between, center);
+    gap: 20px;
+
+    @include responsive-medium {
+      gap: 15px;
+    }
+
+    @include responsive-small {
+      gap: 10px;
+    }
+  }
+}
+
+.theme-toggler {
+  @include flex;
+  gap: 5px;
+
+  &:hover .theme-toggler__text {
+    color: $dark-text !important;
+  }
+
+  &__btn {
+    @include flex(flex-start, center);
+    width: 38.5px;
+    height: 22px;
+    background-color: $dark-text;
+    border-radius: 40px;
+    padding: 0 2.5px;
+    cursor: pointer;
+
+    @include responsive-small {
+      width: 36px;
+    }
+  }
+
+  &__dot {
+    display: inline-block;
+    background-color: $white;
+    width: 18px;
+    height: 18px;
+    border-radius: inherit;
+
+    @include responsive-small {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &__text {
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: capitalize;
+    cursor: context-menu;
+    user-select: none;
+
+    @include responsive-small {
+      display: none;
+    }
+
+    &#light {
+      color: $dark-text;
+    }
+
+    &#dark {
+      color: $gray-light;
+    }
+  }
+}
+
+.sign-btn {
+  @include flex(space-between, center);
+  cursor: pointer;
+  gap: 5px;
+  padding: 7px 10px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;
+  background-color: $white;
+
+  @include responsive-small {
+    padding: 5px;
+  }
+
+  &:hover {
+    transform: translatey(-4px);
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+      rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  }
+
+  &__icon {
+    width: 23px;
+    height: 23px;
+  }
+
+  &__text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    letter-spacing: -0.5px;
+    font-weight: 500;
+    user-select: none;
+
+    @include responsive-small {
+      display: none;
+    }
+  }
+}
+
+.nav-logo {
+  @include flex;
+  gap: 7px;
+  cursor: context-menu;
+
+  @include responsive-medium {
+    gap: 5px;
+  }
+
+  &__icon {
+    user-select: none;
+    animation: logo-spin infinite 15s linear;
+    width: 65px;
+
+    @include responsive-large {
+      width: 57px;
+    }
+
+    @include responsive-medium {
+      width: 42px;
+    }
+  }
+
+  &__text {
+    font-size: 26px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+    color: $primary-color;
+
+    @include responsive-medium {
+      font-size: 23px;
+    }
+
+    @include responsive-small {
+      font-size: 18px;
+    }
+  }
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.dark-theme .nav {
+  background-color: $dark;
+
+  .theme-toggler {
+    &:hover .theme-toggler__text {
+      color: $white !important;
+    }
+
+    &__text {
+      &#light {
+        color: $gray-dark;
+      }
+      &#dark {
+        color: $white;
+      }
+    }
+
+    &__btn {
+      justify-content: flex-end;
+      background-color: $white;
+    }
+
+    &__dot {
+      background-color: $dark-text;
+    }
+  }
+}

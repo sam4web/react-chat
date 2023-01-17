@@ -2,12 +2,13 @@
 
 $global-transition: 150ms color linear, 200ms background-color ease-in-out,
   150ms width linear, 200ms border-color linear, transform 200ms linear,
-  margin 220ms linear, 150ms opacity linear;
+  margin 220ms linear, 150ms opacity linear, 150ms box-shadow linear;
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: $global-transition;
 
   &::selection {
     background-color: $primary-color;
@@ -32,10 +33,14 @@ body {
   height: 100vh;
   font-size: 18px;
   line-height: 24px;
-  font-family: Nunito;
+  font-family: 'Nunito', sans-serif;
 
   @include responsive_small {
     font-size: 16px;
+  }
+
+  &.dark-theme {
+    background-color: $dark-secondary;
   }
 }
 
@@ -55,8 +60,4 @@ li {
 
 a {
   text-decoration: none;
-}
-
-.noselect {
-  user-select: none;
 }
