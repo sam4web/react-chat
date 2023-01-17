@@ -1,4 +1,5 @@
 import { FcGoogle } from 'react-icons/fc';
+import { BsSunFill, BsMoonFill } from 'react-icons/bs';
 
 export default function Navbar({ toggleTheme }) {
   return (
@@ -11,22 +12,18 @@ export default function Navbar({ toggleTheme }) {
 
         <div className='nav-options'>
           <div className='theme-toggler' onClick={toggleTheme}>
-            <span className='theme-toggler__text' id='light'>
-              light
-            </span>
+            <BsSunFill className='theme-toggler__icon' id='light' />
             <div className='theme-toggler__btn'>
               <div className='theme-toggler__dot'></div>
             </div>
-            <span className='theme-toggler__text' id='dark'>
-              dark
-            </span>
+            <BsMoonFill className='theme-toggler__icon' id='dark' />
           </div>
           {/* /theme-toggler */}
 
-          <buttton className='sign-btn'>
+          <button className='sign-btn'>
             <FcGoogle className='sign-btn__icon' />
             <span className='sign-btn__text'>Sign in with Google</span>
-          </buttton>
+          </button>
           {/* /sign-btn */}
         </div>
         {/* /nav-options */}

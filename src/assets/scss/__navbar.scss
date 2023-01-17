@@ -25,8 +25,9 @@
 .theme-toggler {
   @include flex;
   gap: 5px;
+  cursor: pointer;
 
-  &:hover .theme-toggler__text {
+  &:hover .theme-toggler__icon {
     color: $dark-text !important;
   }
 
@@ -37,7 +38,6 @@
     background-color: $dark-text;
     border-radius: 40px;
     padding: 0 2.5px;
-    cursor: pointer;
 
     @include responsive-small {
       width: 36px;
@@ -57,12 +57,10 @@
     }
   }
 
-  &__text {
-    font-size: 15px;
-    font-weight: 600;
-    text-transform: capitalize;
-    cursor: context-menu;
+  &__icon {
     user-select: none;
+    width: 17.5px;
+    height: 17.5px;
 
     @include responsive-small {
       display: none;
@@ -83,6 +81,7 @@
   cursor: pointer;
   gap: 5px;
   padding: 7px 10px;
+  border: none;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;
   background-color: $white;
@@ -168,11 +167,11 @@
   background-color: $dark;
 
   .theme-toggler {
-    &:hover .theme-toggler__text {
+    &:hover .theme-toggler__icon {
       color: $white !important;
     }
 
-    &__text {
+    &__icon {
       &#light {
         color: $gray-dark;
       }
