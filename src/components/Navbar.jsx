@@ -1,7 +1,7 @@
 import { FcGoogle } from 'react-icons/fc';
 import { BsSunFill, BsMoonFill } from 'react-icons/bs';
 
-export default function Navbar({ toggleTheme }) {
+export default function Navbar({ toggleTheme, signInHandle, currentUser }) {
   return (
     <>
       <nav className='nav'>
@@ -21,11 +21,28 @@ export default function Navbar({ toggleTheme }) {
           </div>
           {/* /theme-toggler */}
 
-          <button className='sign-btn btn'>
-            <FcGoogle className='btn__icon' />
-            <span className='btn__text'>Sign in with Google</span>
-          </button>
-          {/* /sign-btn */}
+          {/* displays users avatar when signed in */}
+          {currentUser && (
+            <>
+              <img
+                className='user-avatar'
+                src={currentUser.photoURL}
+                alt='avatar'
+              />
+              {/* /user-avatar */}
+            </>
+          )}
+
+          {/* displays sign-btn when not signed in */}
+          {!currentUser && (
+            <>
+              <button className='sign-btn btn' onClick={signInHandle}>
+                <FcGoogle className='btn__icon' />
+                <span className='btn__text'>Sign in with Google</span>
+              </button>
+              {/* /sign-btn */}
+            </>
+          )}
         </div>
         {/* /nav-options */}
       </nav>

@@ -124,6 +124,13 @@
   }
 }
 
+.user-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 40px;
+  cursor: pointer;
+}
+
 .nav-logo {
   @include flex;
   gap: 7px;

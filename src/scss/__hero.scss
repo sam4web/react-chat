@@ -2,6 +2,8 @@
   padding: 70px 10px;
   text-align: center;
   position: relative;
+  overflow-x: hidden;
+
   font-family: 'Inter', sans-serif;
 
   @include responsive-medium {
@@ -13,6 +15,8 @@
     color: $primary-color;
     font-size: 46px;
     margin-bottom: 35px;
+    letter-spacing: -1px;
+    word-spacing: -5px;
 
     @include responsive-medium {
       font-size: 32px;
