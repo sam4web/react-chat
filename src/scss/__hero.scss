@@ -1,13 +1,16 @@
 .hero__section {
-  padding: 70px 10px;
-  text-align: center;
-  position: relative;
-  overflow-x: hidden;
-
   font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  height: 100vh;
 
-  @include responsive-medium {
-    padding: 60px 10px;
+  .section-container {
+    position: relative;
+    padding: 70px 10px;
+    text-align: center;
+
+    @include responsive-medium {
+      padding: 60px 10px;
+    }
   }
 
   .title {
