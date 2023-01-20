@@ -134,6 +134,7 @@
 .nav-logo {
   @include flex;
   gap: 7px;
+  user-select: none;
   cursor: context-menu;
 
   @include responsive-medium {
