@@ -22,9 +22,6 @@ export default function App() {
         families: ['Nunito', 'Inter'],
       },
     });
-
-    // test - temporary
-    if (user) console.log(user);
   }, []);
 
   // theme toggle
@@ -62,9 +59,14 @@ export default function App() {
       });
   };
 
+  const GlobalProps = {
+    toggleTheme,
+    SignInWithGoogle,
+  };
+
   return (
     <>
-      <Root />
+      <Root globalProps={GlobalProps} />
     </>
   );
 }

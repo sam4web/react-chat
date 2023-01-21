@@ -34,7 +34,6 @@ body {
   font-size: 18px;
   line-height: 24px;
   font-family: 'Nunito', sans-serif;
-  overflow: hidden;
 
   @include responsive-small {
     font-size: 16px;
@@ -53,58 +52,4 @@ img {
 ul {
   margin: 0;
   padding: 0;
-}
-
-.btn {
-  @include flex(space-between, center);
-  background-color: $primary-color;
-  color: $white;
-  text-decoration: none;
-  gap: 5px;
-  cursor: pointer;
-  width: 100%;
-  max-width: fit-content;
-  padding: 10px 15px;
-  border: 2.3px solid transparent;
-  border-radius: 3px;
-
-  @include responsive-small {
-    padding: 5px;
-  }
-
-  &-transparent {
-    box-shadow: none !important;
-    border: none;
-    background-color: transparent;
-
-    &:hover .btn__text {
-      text-decoration: underline;
-    }
-
-    .btn__icon {
-      color: $primary-color;
-    }
-
-    .btn__text {
-      color: $primary-color;
-    }
-  }
-
-  &:hover {
-    transform: translatey(-4px);
-    background-color: $white;
-    border-color: $primary-color;
-    color: $dark;
-  }
-
-  &__icon {
-    width: 23px;
-    height: 23px;
-  }
-
-  &__text {
-    font-weight: 500;
-    user-select: none;
-    font-size: 16px;
-  }
 }
