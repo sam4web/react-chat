@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import WebFont from 'webfontloader';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
+
+import Root from './routes/root';
 
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -22,6 +22,8 @@ export default function App() {
         families: ['Nunito', 'Inter'],
       },
     });
+
+    // test - temporary
     if (user) console.log(user);
   }, []);
 
@@ -41,6 +43,7 @@ export default function App() {
     setIsDarkTheme((prevIsDarkTheme) => !prevIsDarkTheme);
   };
 
+  // Signs in user with google
   const SignInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
@@ -61,22 +64,7 @@ export default function App() {
 
   return (
     <>
-      <main className='container'>
-        <Navbar
-          toggleTheme={toggleTheme}
-          signInHandle={SignInWithGoogle}
-          currentUser={user}
-        />
-
-        {user && (
-          <>
-            <h1>Hello, {user.displayName}!</h1>
-            <img src={user.photoURL} alt='avatar' />
-          </>
-        )}
-
-        {!user && <Hero />}
-      </main>
+      <Root />
     </>
   );
 }
