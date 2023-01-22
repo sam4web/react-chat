@@ -1,9 +1,12 @@
+// pages
 import Welcome from '../pages/Welcome';
 import Chat from '../pages/Chat';
 import NotFound from '../pages/NotFound';
 
+// components
 import Navbar from '../components/Navbar';
 
+// dependencies
 import { auth } from '../utils/firebase';
 import { Route, Routes } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -14,6 +17,7 @@ export default function Root({ globalProps }) {
   const { toggleTheme, SignInWithGoogle } = globalProps;
   const [currentUser, setCurrentUser] = useState('');
 
+  // sets user state if logged in
   useEffect(() => {
     setCurrentUser(user);
   }, [user]);

@@ -1,12 +1,11 @@
 import Root from './routes/root';
-import { SiReact, SiFirebase } from 'react-icons/si';
-import WebFont from 'webfontloader';
 import { useEffect, useState } from 'react';
-
+import WebFont from 'webfontloader';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './utils/firebase';
 import { useNavigate } from 'react-router-dom';
+import { SiReact, SiFirebase } from 'react-icons/si';
 
 export default function App() {
   let navigate = useNavigate();
@@ -16,15 +15,16 @@ export default function App() {
     JSON.parse(localStorage.getItem('isDarkTheme'))
   );
 
-  // Fonts
-  // => load fonts when page loads using 'webfontloader' package
+  // when page loads
+  // => load fontsusing 'webfontloader' package
+  // => navigates to '/welcome'
   useEffect(() => {
     WebFont.load({
       google: {
         families: ['Nunito', 'Inter'],
       },
     });
-    return navigate('/welcome/');
+    return navigate('/welcome');
   }, []);
 
   // theme toggle

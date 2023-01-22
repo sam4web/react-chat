@@ -7,6 +7,7 @@ export default function Welcome({ user, signInHandle }) {
   let navigate = useNavigate();
   const [colorfulIcon, setColorfulIcon] = useState(false);
 
+  // navigate to '/chat' page if user is logged in
   useEffect(() => {
     if (user) {
       return navigate('/chat');
