@@ -2,6 +2,7 @@
   @include flex();
   padding: 20px;
   margin-bottom: 20px;
+  background-color: $white;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 
@@ -104,10 +105,11 @@
 }
 
 .sign-btn {
-  background-color: $white;
+  background-color: $white !important;
   border-radius: 5px;
   padding: 8.5px 10px;
   border: none;
+  min-width: fit-content;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;
 
   &:hover {
@@ -130,6 +132,7 @@
   height: 45px;
   border-radius: 40px;
   cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 0px 1px;
 }
 
 .nav-logo {

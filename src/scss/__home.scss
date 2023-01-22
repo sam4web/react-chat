@@ -1,0 +1,61 @@
+.home__page {
+  padding-top: 60px;
+
+  @include responsive-medium {
+    padding-top: 30px;
+  }
+
+  .section-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 10px auto;
+    text-align: center;
+    padding: 0 10px;
+
+    @include responsive-medium {
+      max-width: 350px;
+    }
+  }
+
+  .section-title {
+    font-size: 36px;
+    line-height: 41px;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    color: $primary-color;
+
+    @include responsive-medium {
+      font-size: 32px;
+      line-height: 39px;
+    }
+  }
+
+  .section-container {
+    a {
+      color: $primary-color;
+    }
+
+    @include dark-theme {
+      color: $light;
+    }
+  }
+
+  .btn-container {
+    @include flex(center, center);
+    margin-top: 30px;
+    gap: 20px;
+  }
+
+  #github-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  #join-btn {
+    &:hover .btn__icon {
+      width: 20.5px !important;
+      height: 20.5px !important;
+    }
+  }
+}

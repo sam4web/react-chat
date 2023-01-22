@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function Chat({ user }) {
@@ -10,5 +10,5 @@ export default function Chat({ user }) {
     }
   }, [user]);
 
-  return <h1>Hello {user.displayName}</h1>;
+  return <h1>Hello, {user.displayName}!</h1>;
 }

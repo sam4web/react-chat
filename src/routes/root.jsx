@@ -26,7 +26,10 @@ export default function Root({ globalProps }) {
         user={currentUser}
       />
       <Routes>
-        <Route path='/' element={<Home user={currentUser} />} />
+        <Route
+          path='/'
+          element={<Home signInHandle={SignInWithGoogle} user={currentUser} />}
+        />
         <Route path='/chat/' element={<Chat user={currentUser} />} />
         <Route path='/*' element={<NotFound />} />
       </Routes>

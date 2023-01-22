@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import WebFont from 'webfontloader';
-
 import Root from './routes/root';
+import { SiReact, SiFirebase } from 'react-icons/si';
+import WebFont from 'webfontloader';
+import { useEffect, useState } from 'react';
 
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -59,6 +59,8 @@ export default function App() {
       });
   };
 
+  // Global props
+  //  => to pass in required components
   const GlobalProps = {
     toggleTheme,
     SignInWithGoogle,
@@ -67,6 +69,8 @@ export default function App() {
   return (
     <>
       <Root globalProps={GlobalProps} />
+      <SiFirebase className='background-icon' id='firebase-icon' />
+      <SiReact className='background-icon' id='react-icon' />
     </>
   );
 }
