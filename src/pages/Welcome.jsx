@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AiOutlineGoogle, AiOutlineGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 
-export default function Home({ user, signInHandle }) {
+export default function Welcome({ user, signInHandle }) {
   let navigate = useNavigate();
   const [colorfulIcon, setColorfulIcon] = useState(false);
 
@@ -19,7 +19,7 @@ export default function Home({ user, signInHandle }) {
         <div className='section-container'>
           <h1 className='section-title'>Chat with fellow developers</h1>
           <p className='section-description'>
-            For developers by developer. A real-time chat application build with{' '}
+            By developer for developers. A real-time chat application build with{' '}
             <a href='https://reactjs.org/'>ReactJS</a>
             {' and '}
             <a href='https://firebase.google.com/'>Firebase</a>. Simple way to

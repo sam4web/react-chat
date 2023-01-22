@@ -1,4 +1,4 @@
-import Home from '../pages/Home';
+import Welcome from '../pages/Welcome';
 import Chat from '../pages/Chat';
 import NotFound from '../pages/NotFound';
 
@@ -27,8 +27,10 @@ export default function Root({ globalProps }) {
       />
       <Routes>
         <Route
-          path='/'
-          element={<Home signInHandle={SignInWithGoogle} user={currentUser} />}
+          path='/welcome/'
+          element={
+            <Welcome signInHandle={SignInWithGoogle} user={currentUser} />
+          }
         />
         <Route path='/chat/' element={<Chat user={currentUser} />} />
         <Route path='/*' element={<NotFound />} />

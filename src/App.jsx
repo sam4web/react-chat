@@ -6,8 +6,10 @@ import { useEffect, useState } from 'react';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './utils/firebase';
+import { useNavigate } from 'react-router-dom';
 
 export default function App() {
+  let navigate = useNavigate();
   const [user] = useAuthState(auth);
 
   const [isDarkTheme, setIsDarkTheme] = useState(
@@ -22,6 +24,7 @@ export default function App() {
         families: ['Nunito', 'Inter'],
       },
     });
+    return navigate('/welcome/');
   }, []);
 
   // theme toggle
