@@ -1,9 +1,11 @@
 import { FcGoogle } from 'react-icons/fc';
 import { BsSunFill, BsMoonFill } from 'react-icons/bs';
 import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Navbar({ toggleTheme, signInHandle, user }) {
   const [currentUser, setCurrentUser] = useState('');
+
   useEffect(() => {
     setCurrentUser(user);
   }, [user]);
@@ -30,12 +32,14 @@ export default function Navbar({ toggleTheme, signInHandle, user }) {
           {/* displays users avatar when signed in */}
           {currentUser && (
             <>
-              <img
-                className='user-avatar'
-                src={currentUser.photoURL}
-                alt='avatar'
-              />
-              {/* /user-avatar */}
+              <Link to={'/profile'}>
+                <img
+                  className='user-avatar'
+                  src={currentUser.photoURL}
+                  alt='avatar'
+                />
+                {/* /user-avatar */}
+              </Link>
             </>
           )}
 

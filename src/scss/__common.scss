@@ -125,6 +125,10 @@ ul {
     color: $dark;
   }
 
+  &-round {
+    border-radius: 1000px;
+  }
+
   &-transparent,
   &-link {
     background-color: transparent !important;

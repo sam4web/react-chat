@@ -1,6 +1,7 @@
 // pages
 import Welcome from '../pages/Welcome';
 import Chat from '../pages/Chat';
+import Profile from '../pages/Profile';
 import NotFound from '../pages/NotFound';
 
 // components
@@ -36,7 +37,8 @@ export default function Root({ globalProps }) {
             <Welcome signInHandle={SignInWithGoogle} user={currentUser} />
           }
         />
-        <Route path='/chat/' element={<Chat user={currentUser} />} />
+        <Route path='/profile' element={<Profile user={currentUser} />} />
+        <Route path='/chat' element={<Chat user={currentUser} />} />
         <Route path='/*' element={<NotFound />} />
       </Routes>
     </>
