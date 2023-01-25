@@ -2,20 +2,19 @@
 import Welcome from '../pages/Welcome';
 import Chat from '../pages/Chat';
 import Profile from '../pages/Profile';
-import NotFound from '../pages/NotFound';
 
 // components
 import Navbar from '../components/Navbar';
 
 // dependencies
 import { auth } from '../utils/firebase';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useEffect, useState } from 'react';
 
 export default function Root({ globalProps }) {
   const [user] = useAuthState(auth);
-  const { toggleTheme, SignInWithGoogle } = globalProps;
+  const { toggleTheme, SignInWithGoogle, SignOut } = globalProps;
   const [currentUser, setCurrentUser] = useState('');
 
   // sets user state if logged in
@@ -37,9 +36,12 @@ export default function Root({ globalProps }) {
             <Welcome signInHandle={SignInWithGoogle} user={currentUser} />
           }
         />
-        <Route path='/profile' element={<Profile user={currentUser} />} />
+        <Route
+          path='/profile'
+          element={<Profile user={currentUser} signOut={SignOut} />}
+        />
         <Route path='/chat' element={<Chat user={currentUser} />} />
-        <Route path='/*' element={<NotFound />} />
+        <Route path='/*' element={<Navigate to='/welcome' />} />
       </Routes>
     </>
   );

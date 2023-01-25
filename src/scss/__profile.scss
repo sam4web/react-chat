@@ -1,0 +1,95 @@
+.user-profile {
+  max-width: 500px;
+  margin: 0 auto;
+  margin-top: 50px;
+  border-radius: 10px;
+  padding: 20px 15px;
+  padding-bottom: 40px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px;
+  background-color: rgba($gray-light, 0.15);
+
+  @include responsive-medium {
+    margin-top: 10px;
+    padding: 5px;
+    padding-bottom: 20px;
+  }
+
+  @include responsive-small {
+    max-width: 100%;
+    margin: 0 10px;
+  }
+
+  @include dark-theme {
+    background-color: rgba($gray-dark, 0.2);
+  }
+
+  .section-container {
+    padding: 0 10px;
+    text-align: center;
+    margin: 20px auto;
+    margin-bottom: 40px;
+  }
+
+  .btn {
+    margin: 0 auto;
+  }
+
+  &__img {
+    border-radius: 100px;
+    position: relative;
+    display: block;
+    margin: 25px auto;
+    border: 3px solid transparent;
+    border-left-color: $primary-color;
+    border-right-color: $primary-color;
+    padding: 10px;
+  }
+
+  &__name {
+    font-size: 34px;
+    line-height: 42px;
+    margin-bottom: 8px;
+    color: $dark;
+
+    @include dark-theme {
+      color: $light;
+    }
+  }
+
+  &__email {
+    @include flex(center, center);
+    gap: 5px;
+    font-size: 20px;
+    line-height: 28px;
+    color: $black;
+
+    @include dark-theme {
+      color: $white;
+    }
+
+    .mail-icon {
+      font-size: 20px;
+    }
+  }
+}
+
+.back-btn {
+  @include flex(center, center);
+  padding: 6px;
+  border-radius: 40px;
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  color: $dark;
+  cursor: pointer;
+  transition: all 150ms linear;
+
+  @include dark-theme {
+    color: $white;
+  }
+
+  &:hover {
+    background-color: $primary-color;
+    color: $white;
+  }
+}

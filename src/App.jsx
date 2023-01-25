@@ -1,16 +1,13 @@
 import Root from './routes/root';
 import { useEffect, useState } from 'react';
 import WebFont from 'webfontloader';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import { auth } from './utils/firebase';
 import { useNavigate } from 'react-router-dom';
 import { SiReact, SiFirebase } from 'react-icons/si';
 
 export default function App() {
   let navigate = useNavigate();
-  const [user] = useAuthState(auth);
-
   const [isDarkTheme, setIsDarkTheme] = useState(
     JSON.parse(localStorage.getItem('isDarkTheme'))
   );
@@ -62,11 +59,17 @@ export default function App() {
       });
   };
 
+  // Signs out user
+  const SignOut = () => {
+    signOut(auth);
+  };
+
   // Global props
   //  => to pass in required components
   const GlobalProps = {
     toggleTheme,
     SignInWithGoogle,
+    SignOut,
   };
 
   return (
