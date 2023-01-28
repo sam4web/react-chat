@@ -1,8 +1,95 @@
 .chat {
+  padding: 0 10px;
+
+  .message {
+    @include flex(flex-start, flex-start);
+    gap: 6px;
+    max-width: 700px;
+    width: fit-content;
+    height: 100%;
+    margin-bottom: 25px;
+
+    @include responsive-large {
+      max-width: 600;
+    }
+
+    @include responsive-medium {
+      flex-direction: column !important;
+      gap: 0;
+    }
+
+    &__image {
+      flex: 0.1;
+
+      img {
+        width: 50px;
+        border-radius: 100%;
+      }
+    }
+
+    &__body {
+      flex: 1;
+    }
+
+    &__user {
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 26px;
+      color: $dark;
+
+      @include dark-theme {
+        color: $light;
+        font-weight: 400;
+      }
+    }
+
+    &__posted {
+      font-size: 13px;
+      line-height: 10px;
+      color: $gray-dark;
+
+      @include dark-theme {
+        color: $gray-light;
+        font-weight: 400;
+      }
+    }
+
+    &__text {
+      margin-top: 5px;
+      background-color: rgba($gray-light, $alpha: 0.9);
+      padding: 7px 12px;
+      border-radius: 10px;
+      font-weight: 400;
+
+      @include dark-theme {
+        background-color: rgba($gray-dark, $alpha: 0.35);
+        color: $light;
+      }
+    }
+
+    &.self {
+      margin-left: auto;
+      flex-direction: row-reverse;
+
+      @include responsive-medium {
+        align-items: flex-end;
+      }
+
+      .message__user,
+      .message__posted {
+        text-align: right;
+      }
+
+      .message__text {
+        background-color: rgba($primary-color, $alpha: 0.8);
+      }
+    }
+  }
+
   .message-form {
     @include flex(space-between, center);
     flex-direction: row-reverse;
-    position: absolute;
+    position: fixed;
     right: 0;
     bottom: 10px;
     width: 100%;
@@ -20,6 +107,7 @@
     .input-container {
       flex: 1;
       position: relative;
+      height: 50px;
     }
 
     &__hide-input {
@@ -46,14 +134,16 @@
 
     &__input {
       width: 100%;
+      height: 100%;
       padding: 11px 15px;
       border: none;
       outline: none;
-      background-color: rgba($gray-light, $alpha: 0.9);
+      background-color: $gray-light;
       font-size: inherit;
       font-family: inherit;
       font-weight: 600;
       color: $dark;
+      resize: none;
       border-radius: 5px;
       box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 
@@ -61,8 +151,17 @@
         color: $dark;
       }
 
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $gray-light;
+        border-radius: 100px;
+      }
+
       @include dark-theme {
-        background-color: rgba($gray-dark, $alpha: 0.4);
+        background-color: $dark-navbar;
         font-weight: 400;
         color: $light;
 

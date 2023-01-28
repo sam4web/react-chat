@@ -37,10 +37,19 @@ body {
   font-size: 18px;
   line-height: 24px;
   font-family: 'Nunito', sans-serif;
-  padding-bottom: 20px;
+  padding-bottom: 70px;
 
   @include responsive-small {
     font-size: 16px;
+  }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $gray-light;
+    border-radius: 20px;
   }
 
   &.dark-theme {
@@ -57,7 +66,7 @@ body {
   }
 
   .background-icon {
-    position: absolute;
+    position: fixed;
     color: $gray-light;
     opacity: 0.75;
     z-index: -1;
