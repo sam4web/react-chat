@@ -16,7 +16,7 @@ export default function Welcome({ user, signInHandle }) {
 
   return (
     <>
-      <main className='home__page'>
+      <main className='welcome'>
         <div className='section-container'>
           <h1 className='section-title'>Chat with fellow developers</h1>
           <p className='section-description'>

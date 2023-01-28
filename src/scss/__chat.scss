@@ -1,0 +1,92 @@
+.chat {
+  .message-form {
+    @include flex(space-between, center);
+    flex-direction: row-reverse;
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    width: 100%;
+    padding: 10px 20px;
+    gap: 10px;
+
+    @include responsive-medium {
+      bottom: 0px;
+    }
+
+    @include responsive-small {
+      padding: 10px;
+    }
+
+    .input-container {
+      flex: 1;
+      position: relative;
+    }
+
+    &__hide-input {
+      @include flex(center, center);
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 25px;
+      border: none;
+      padding: 5px;
+      background-color: transparent;
+      color: $dark;
+
+      &:hover {
+        transform: translateY(-50%) rotate(90deg);
+      }
+
+      @include dark-theme {
+        color: $light;
+      }
+    }
+
+    &__input {
+      width: 100%;
+      padding: 11px 15px;
+      border: none;
+      outline: none;
+      background-color: rgba($gray-light, $alpha: 0.9);
+      font-size: inherit;
+      font-family: inherit;
+      font-weight: 600;
+      color: $dark;
+      border-radius: 5px;
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+
+      &::placeholder {
+        color: $dark;
+      }
+
+      @include dark-theme {
+        background-color: rgba($gray-dark, $alpha: 0.4);
+        font-weight: 400;
+        color: $light;
+
+        &::placeholder {
+          color: $light;
+        }
+      }
+    }
+
+    &__btn {
+      background-color: $primary-color !important;
+      color: $dark !important;
+      min-width: 45px;
+      height: 46px;
+      font-size: 22px;
+      transition: $global-transition, border-radius 150ms linear;
+
+      @include dark-theme {
+        color: $light !important;
+      }
+
+      &:hover {
+        border-radius: 13px;
+      }
+    }
+  }
+}

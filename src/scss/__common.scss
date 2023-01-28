@@ -59,7 +59,7 @@ body {
   .background-icon {
     position: absolute;
     color: $gray-light;
-    opacity: 0.6;
+    opacity: 0.75;
     z-index: -1;
     user-select: none;
 
@@ -109,6 +109,7 @@ ul {
   font-size: 16px;
   line-height: 22px;
   cursor: pointer;
+  outline: none;
   text-decoration: none;
   padding: 7px;
   width: 100%;
