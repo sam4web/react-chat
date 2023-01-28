@@ -60,7 +60,7 @@ export default function Chat({ user }) {
     date = date.toDate();
     const formatedDate = `${date.getFullYear()}/${
       date.getMonth() + 1
-    }/${date.getDate()}`;
+    }/${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
     return formatedDate;
   };
 
@@ -86,27 +86,16 @@ export default function Chat({ user }) {
             <div
               key={nanoid()}
               className={`message ${
-                user.uid === message.author.user_id ? '' : ''
+                user.uid === message.author.user_id ? 'self' : ''
               }`}
             >
-              <div className='message__image'>
-                <img src={message.author.photoURL} alt='' />
+              <div className='message__posted'>
+                {getDateFormat(message.postedDate)}
               </div>
-              {/* /message_image */}
-
-              <div className='message__body'>
-                <div className='message__posted'>
-                  {getDateFormat(message.postedDate)}
-                </div>
-                <div className='message__user'>
-                  {message.author.displayName}
-                </div>
-                <ReactMarkdown className='message__text'>
-                  {message.body}
-                </ReactMarkdown>
-                {/* /message_text */}
-              </div>
-              {/* /message_body */}
+              <div className='message__user'>{message.author.displayName}</div>
+              <ReactMarkdown className='message__text'>
+                {message.body}
+              </ReactMarkdown>
             </div>
           ))}
 
