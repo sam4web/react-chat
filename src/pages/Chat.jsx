@@ -3,73 +3,112 @@ import { useNavigate } from 'react-router-dom';
 import { FaRegPaperPlane } from 'react-icons/fa';
 import { RxCross2 } from 'react-icons/rx';
 import ReactMarkdown from 'react-markdown';
+import { nanoid } from 'nanoid';
+import { db } from '../utils/firebase';
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  onSnapshot,
+  orderBy,
+  query,
+  Timestamp,
+} from 'firebase/firestore';
 
 export default function Chat({ user }) {
   let navigate = useNavigate();
   const [message, setMessage] = useState('');
+  const [messageList, setMessageList] = useState([]);
   const [showInput, setShowInput] = useState(false);
+  const [isMessageValid, setIsMessageValid] = useState(false);
 
-  const messages = [
-    {
-      user: user,
-      body: 'Continually streamline front-end testing procedures and.',
-      posted_date: new Date().toLocaleDateString(),
-    },
-    {
-      user: user,
-      body: 'Monotonectally reinvent B2C schemas with backward-compatible catalysts.',
-      posted_date: new Date().toLocaleDateString(),
-    },
-    {
-      user: user,
-      body: 'Compellingly transform visionary methodologies for just in time methods of empowerment. Authoritatively brand multidisciplinary niches with goal-oriented.',
-      posted_date: new Date().toLocaleDateString(),
-    },
-    {
-      user: user,
-      body: 'Credibly incubate best-of-breed web services for backend potentialities. Quickly plagiarize effective portals vis-a-vis.',
-      posted_date: new Date().toLocaleDateString(),
-    },
-    {
-      user: user,
-      body: 'Credibly incubate best-of-breed web services for backend potentialities. Quickly plagiarize effective portals vis-a-vis.Credibly incubate best-of-breed web services for backend potentialities. Quickly plagiarize effective portals vis-a-vis.Credibly incubate best-of-breed web services for backend potentialities. Quickly plagiarize effective portals vis-a-vis.Credibly incubate best-of-breed web services for backend potentialities. Quickly plagiarize effective portals vis-a-vis.Credibly incubate best-of-breed web services for backend potentialities. Quickly plagiarize effective portals vis-a-vis.Credibly incubate best-of-breed web services for backend potentialities. Quickly plagiarize effective portals vis-a-vis.Credibly incubate best-of-breed web services for backend potentialities. Quickly plagiarize effective portals vis-a-vis.Credibly incubate best-of-breed web services for backend potentialities. Quickly plagiarize effective portals vis-a-vis.Credibly incubate best-of-breed web services for backend potentialities. Quickly plagiarize effective portals vis-a-vis.',
-      posted_date: new Date().toLocaleDateString(),
-    },
-  ];
-
+  // navigate to '/welcome' page if user is not logged in
   useEffect(() => {
     if (!user) {
       return navigate('/');
     }
   }, [user]);
 
-  const handleSubmit = (e) => {
+  // checks & updates messages in real-time
+  //  => sets messageList state to list of messages from firebase db
+  useEffect(() => {
+    const q = query(collection(db, 'messages'), orderBy('postedDate'));
+    onSnapshot(q, (querySnapshot) => {
+      const messages = [];
+      querySnapshot.forEach((doc) => {
+        messages.push(doc.data());
+      });
+      setMessageList(messages);
+    });
+  }, []);
+
+  // check if message is valid
+  //  => check if user entered message or not
+  //  => if not option to close input box is visible
+  useEffect(() => {
+    if (message.length > 0) {
+      setIsMessageValid(true);
+    } else {
+      setIsMessageValid(false);
+    }
+  }, [message]);
+
+  // return formatted date as a string
+  //  => formats and returns date to display
+  const getDateFormat = (date) => {
+    date = date.toDate();
+    const formatedDate = `${date.getFullYear()}/${
+      date.getMonth() + 1
+    }/${date.getDate()}`;
+    return formatedDate;
+  };
+
+  // when user submits the form(message input)
+  //  => adds message to firebase db
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(message);
+    const docRef = doc(db, 'users', user.uid);
+    const docSnap = await getDoc(docRef);
+    await addDoc(collection(db, 'messages'), {
+      author: docSnap.data(),
+      body: message,
+      postedDate: Timestamp.now(),
+    });
     setMessage('');
   };
 
   return (
     <>
       <div className='chat'>
-        {messages.map((message) => (
-          <>
-            <div className={`message ${user === message.user ? '' : ''}`}>
+        {messageList &&
+          messageList.map((message) => (
+            <div
+              key={nanoid()}
+              className={`message ${
+                user.uid === message.author.user_id ? '' : ''
+              }`}
+            >
               <div className='message__image'>
-                <img src={message.user.photoURL} alt='' />
+                <img src={message.author.photoURL} alt='' />
               </div>
               {/* /message_image */}
+
               <div className='message__body'>
-                <div className='message__posted'>{message.posted_date}</div>
-                <div className='message__user'>{message.user.displayName}</div>
+                <div className='message__posted'>
+                  {getDateFormat(message.postedDate)}
+                </div>
+                <div className='message__user'>
+                  {message.author.displayName}
+                </div>
                 <ReactMarkdown className='message__text'>
                   {message.body}
                 </ReactMarkdown>
+                {/* /message_text */}
               </div>
               {/* /message_body */}
             </div>
-          </>
-        ))}
+          ))}
 
         <form className='message-form' onSubmit={(e) => handleSubmit(e)}>
           {showInput && (
@@ -86,32 +125,41 @@ export default function Chat({ user }) {
                 />
                 {/* /input */}
 
-                <button
-                  type='button'
-                  className='message-form__hide-input'
-                  onClick={() => {
-                    setShowInput(false);
-                    setMessage('');
-                  }}
-                >
-                  <RxCross2 />
-                </button>
+                {isMessageValid ? (
+                  <button
+                    type='submit'
+                    className='message-form__input-btn submit'
+                  >
+                    <FaRegPaperPlane />
+                  </button>
+                ) : (
+                  <button
+                    type='button'
+                    className='message-form__input-btn'
+                    onClick={() => {
+                      setShowInput(false);
+                    }}
+                  >
+                    <RxCross2 />
+                  </button>
+                )}
                 {/* /hide-input-btn */}
               </div>
               {/* /input-container */}
             </>
           )}
 
-          <button
-            type={`${showInput ? 'submit' : 'button'}`}
-            className='btn message-form__btn'
-            onClick={() => {
-              setShowInput(true);
-            }}
-          >
-            <FaRegPaperPlane />
-          </button>
-          {/* send/show-btn */}
+          {!showInput && (
+            <button
+              type='button'
+              className='btn message-form__btn'
+              onClick={() => {
+                setShowInput(true);
+              }}
+            >
+              <FaRegPaperPlane />
+            </button>
+          )}
         </form>
         {/* /message-form */}
       </div>

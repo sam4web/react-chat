@@ -1,8 +1,9 @@
 import Root from './routes/root';
 import { useEffect, useState } from 'react';
 import WebFont from 'webfontloader';
+import { auth, db } from './utils/firebase';
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
-import { auth } from './utils/firebase';
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { SiReact, SiFirebase } from 'react-icons/si';
 
@@ -40,23 +41,27 @@ export default function App() {
     setIsDarkTheme((prevIsDarkTheme) => !prevIsDarkTheme);
   };
 
+  // adds required user info to firestore
+  //  => when user signs up create a doc in firestore with user information
+  //  => used while storing message data
+  const AddUserInfo = async (user) => {
+    const docRef = doc(db, 'users', user.uid);
+    await setDoc(docRef, {
+      displayName: user.displayName,
+      email: user.email,
+      photoURL: user.photoURL,
+      user_id: user.uid,
+    });
+  };
+
   // Signs in user with google
   const SignInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // The signed-in user info.
-        const user = result.user;
-        console.log(user);
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        const errorCode = error.code;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        console.log(errorMessage);
-        console.log(email);
-      });
+    signInWithPopup(auth, provider).then((result) => {
+      // The signed-in user info.
+      const user = result.user;
+      AddUserInfo(user);
+    });
   };
 
   // Signs out user

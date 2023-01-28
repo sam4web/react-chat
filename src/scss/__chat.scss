@@ -19,8 +19,7 @@
     }
 
     &__image {
-      flex: 0.1;
-
+      flex-basis: 50px;
       img {
         width: 50px;
         border-radius: 100%;
@@ -107,10 +106,9 @@
     .input-container {
       flex: 1;
       position: relative;
-      height: 50px;
     }
 
-    &__hide-input {
+    &__input-btn {
       @include flex(center, center);
       position: absolute;
       top: 50%;
@@ -121,6 +119,9 @@
       border: none;
       padding: 5px;
       background-color: transparent;
+      border-radius: 40px;
+      padding: 10px;
+      border: 2px solid transparent;
       color: $dark;
 
       &:hover {
@@ -130,11 +131,20 @@
       @include dark-theme {
         color: $light;
       }
+
+      &.submit {
+        background-color: $primary-color;
+
+        &:hover {
+          transform: translateY(-50%) rotate(40deg);
+        }
+      }
     }
 
     &__input {
+      display: block;
       width: 100%;
-      height: 100%;
+      height: 65px;
       padding: 11px 15px;
       border: none;
       outline: none;
