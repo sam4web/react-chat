@@ -1,7 +1,7 @@
 import { FcGoogle } from 'react-icons/fc';
 import { BsSunFill, BsMoonFill } from 'react-icons/bs';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Navbar({ toggleTheme, signInHandle, user }) {
   const [currentUser, setCurrentUser] = useState('');

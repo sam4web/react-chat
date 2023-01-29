@@ -5,7 +5,7 @@ import { FcGoogle } from 'react-icons/fc';
 
 export default function Welcome({ user, signInHandle }) {
   let navigate = useNavigate();
-  const [colorfulIcon, setColorfulIcon] = useState(false);
+  const [showColorIcon, setShowColorIcon] = useState(false);
 
   // navigate to '/chat' page if user is logged in
   useEffect(() => {
@@ -33,10 +33,10 @@ export default function Welcome({ user, signInHandle }) {
               className='btn'
               id='join-btn'
               onClick={signInHandle}
-              onMouseEnter={() => setColorfulIcon(true)}
-              onMouseLeave={() => setColorfulIcon(false)}
+              onMouseEnter={() => setShowColorIcon(true)}
+              onMouseLeave={() => setShowColorIcon(false)}
             >
-              {colorfulIcon ? (
+              {showColorIcon ? (
                 <FcGoogle className='btn__icon' />
               ) : (
                 <AiOutlineGoogle className='btn__icon' />

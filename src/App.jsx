@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import WebFont from 'webfontloader';
 import { auth, db } from './utils/firebase';
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { SiReact, SiFirebase } from 'react-icons/si';
 
@@ -14,7 +14,7 @@ export default function App() {
   );
 
   // when page loads
-  // => load fontsusing 'webfontloader' package
+  // => load fonts using 'webfontloader' package
   // => navigates to '/welcome'
   useEffect(() => {
     WebFont.load({

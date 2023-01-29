@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaRegPaperPlane } from 'react-icons/fa';
 import { RxCross2 } from 'react-icons/rx';
-import ReactMarkdown from 'react-markdown';
-import { nanoid } from 'nanoid';
+import MessageBubble from '../components/MessageBubble';
 import { db } from '../utils/firebase';
+import { nanoid } from 'nanoid';
 import {
   addDoc,
   collection,
@@ -54,16 +54,6 @@ export default function Chat({ user }) {
     }
   }, [message]);
 
-  // return formatted date as a string
-  //  => formats and returns date to display
-  const getDateFormat = (date) => {
-    date = date.toDate();
-    const formatedDate = `${date.getFullYear()}/${
-      date.getMonth() + 1
-    }/${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
-    return formatedDate;
-  };
-
   // when user submits the form(message input)
   //  => adds message to firebase db
   const handleSubmit = async (e) => {
@@ -83,20 +73,7 @@ export default function Chat({ user }) {
       <div className='chat'>
         {messageList &&
           messageList.map((message) => (
-            <div
-              key={nanoid()}
-              className={`message ${
-                user.uid === message.author.user_id ? 'self' : ''
-              }`}
-            >
-              <div className='message__posted'>
-                {getDateFormat(message.postedDate)}
-              </div>
-              <div className='message__user'>{message.author.displayName}</div>
-              <ReactMarkdown className='message__text'>
-                {message.body}
-              </ReactMarkdown>
-            </div>
+            <MessageBubble message={message} user={user} key={nanoid()} />
           ))}
 
         <form className='message-form' onSubmit={(e) => handleSubmit(e)}>
