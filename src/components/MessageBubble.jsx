@@ -19,13 +19,23 @@ export default function MessageBubble({ message, user }) {
         user.uid === message.author.user_id ? 'self' : ''
       }`}
     >
-      <div className='message-bubble__posted'>
-        {getDateFormat(message.postedDate)}
+      <img
+        src={message.author.photoURL}
+        className='message-bubble__avatar'
+        alt=''
+      />
+      {/* message-image */}
+
+      <div className='message-bubble__body'>
+        <div className='message-bubble__posted'>
+          {getDateFormat(message.postedDate)}
+        </div>
+        <div className='message-bubble__user'>{message.author.displayName}</div>
+        <ReactMarkdown className='message-bubble__text'>
+          {message.body}
+        </ReactMarkdown>
       </div>
-      <div className='message-bubble__user'>{message.author.displayName}</div>
-      <ReactMarkdown className='message-bubble__text'>
-        {message.body}
-      </ReactMarkdown>
+      {/* message-body */}
     </div>
   );
 }
