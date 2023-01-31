@@ -2,13 +2,11 @@
   padding: 0 10px;
 
   .message-form {
-    @include flex(space-between, center);
-    flex-direction: row-reverse;
     position: fixed;
     right: 0;
     bottom: 10px;
-    width: 100%;
     padding: 10px 20px;
+    display: inline-block;
     gap: 10px;
 
     @include responsive-medium {
@@ -113,5 +111,40 @@
         border-radius: 13px;
       }
     }
+
+    &.show-input {
+      width: 100%;
+    }
+  }
+
+  .scroll-top {
+    position: fixed;
+    bottom: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+    font-size: 24px;
+    margin: auto;
+    min-width: auto;
+    animation: bounce 1.6s linear infinite forwards normal;
+
+    &:hover {
+      animation-play-state: paused;
+      color: $primary-color;
+    }
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0px);
   }
 }

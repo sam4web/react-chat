@@ -1,10 +1,18 @@
+// dependencies
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { nanoid } from 'nanoid';
+
+// icons
 import { FaRegPaperPlane } from 'react-icons/fa';
 import { RxCross2 } from 'react-icons/rx';
+import { IoIosArrowDown } from 'react-icons/io';
+
+// components
 import MessageBubble from '../components/MessageBubble';
+
+// firebase
 import { db } from '../utils/firebase';
-import { nanoid } from 'nanoid';
 import {
   addDoc,
   collection,
@@ -17,7 +25,10 @@ import {
 } from 'firebase/firestore';
 
 export default function Chat({ user }) {
+  const body = document.body;
   let navigate = useNavigate();
+  const [scrollY, setScrollY] = useState(0);
+  const [showScroll, setShowScroll] = useState(false);
   const [message, setMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
   const [showInput, setShowInput] = useState(false);
@@ -29,6 +40,43 @@ export default function Chat({ user }) {
       return navigate('/');
     }
   }, [user]);
+
+  // checks for scroll event in body
+  //  => if scrolled scrollY state is changed to scroll position
+  useEffect(() => {
+    function watchScroll() {
+      body.addEventListener('scroll', () => {
+        setScrollY(body.scrollTop);
+      });
+    }
+    watchScroll();
+    return () => {
+      body.removeEventListener('scroll', () => {
+        setScrollY(body.scrollTop);
+      });
+    };
+  });
+
+  // change showScroll state when page is scrolled up
+  useEffect(() => {
+    if (scrollY < body.scrollHeight / 1.65) {
+      setShowScroll(true);
+    } else {
+      setShowScroll(false);
+    }
+  }, [scrollY]);
+
+  // scrolls to bottom of page(body)
+  const scrollToBottom = () => {
+    body.scrollTo(0, body.scrollHeight);
+  };
+
+  // calls scrollToBottom() functino
+  //  => when message is updated
+  //  => when page loads
+  useEffect(() => {
+    scrollToBottom();
+  }, [messageList]);
 
   // checks & updates messages in real-time
   //  => sets messageList state to list of messages from firebase db
@@ -76,7 +124,16 @@ export default function Chat({ user }) {
             <MessageBubble message={message} user={user} key={nanoid()} />
           ))}
 
-        <form className='message-form' onSubmit={(e) => handleSubmit(e)}>
+        {!showInput && showScroll && (
+          <button onClick={scrollToBottom} className='btn scroll-top'>
+            <IoIosArrowDown />
+          </button>
+        )}
+
+        <form
+          className={`message-form ${showInput ? 'show-input' : ''}`}
+          onSubmit={(e) => handleSubmit(e)}
+        >
           {showInput && (
             <>
               <div className='input-container'>
